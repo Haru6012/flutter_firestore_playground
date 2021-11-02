@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,13 +21,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyFirestorePage(),
+      home: const MyFirestorePage(),
     );
   }
 }
 
 class MyFirestorePage extends StatefulWidget {
-  MyFirestorePage({Key? key}) : super(key: key);
+  const MyFirestorePage({Key? key}) : super(key: key);
 
   @override
   _MyFirestorePageState createState() => _MyFirestorePageState();
@@ -42,12 +42,23 @@ class _MyFirestorePageState extends State<MyFirestorePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-              child: const Text("コレクション＋ドキュメント追加！""),
+              child: const Text("コレクション＋ドキュメント追加！"),
               onPressed: () async {
                 await FirebaseFirestore.instance
                     .collection("users")
                     .doc("id_abc")
-                    .set({"name":"松坂","age":40});
+                    .set({"name": "松坂", "age": 40});
+              },
+            ),
+            ElevatedButton(
+              child: const Text("サブコレクション+ドキュメント作成"),
+              onPressed: () async {
+                await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc("id_abc")
+                    .collection("others")
+                    .doc("id_123")
+                    .set({"price": 600, "date": "9/13"});
               },
             ),
           ],
