@@ -42,7 +42,7 @@ class _MyFirestorePageState extends State<MyFirestorePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(
-              child: const Text("コレクション＋ドキュメント追加"),
+              child: const Text("コレクション＋ドキュメント追加！"),
               onPressed: () async {
                 await FirebaseFirestore.instance
                     .collection("users")
